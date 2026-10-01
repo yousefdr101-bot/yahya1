@@ -1,0 +1,181 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  background: linear-gradient(160deg, #1a1a2e, #030303, #040f1d);
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* ===== الشاشة الأولى ===== */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f0c29, #07060c, #000000);
+  /* تختفي بعد 3 ثواني */
+  animation: introOut 1.2s ease 2s forwards;
+}
+
+.intro h1 {
+  font-size: clamp(3rem, 14vw, 7rem);
+  text-align: center;
+  background: linear-gradient(100deg, #075168, #070405, #067a5b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: popIn 1.5s ease;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.3) rotate(-8deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@keyframes introOut {
+  to {
+    opacity: 0;
+    transform: scale(1.6);
+    filter: blur(20px);
+    visibility: hidden;
+  }
+}
+
+/* ===== المحتوى ===== */
+.content {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 20px;
+  opacity: 0;
+  /* يظهر بعد ما الشاشة الأولى تختفي */
+  animation: showUp 1.2s ease 3.6s forwards;
+}
+
+@keyframes showUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hello {
+  font-size: 6.5rem;
+  margin-bottom: 50px; /* المسافة الكبيرة بين الكلمة والصورة */
+  direction: ltr;
+  color: #b3b2b6;
+}
+
+.hero-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 90px;
+}
+
+.hero-img a {
+  display: block;
+  width: 100%;
+  max-width: 860px;      /* العرض */
+}
+
+.hero-img img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;   /* نفس نسبة الطول للعرض في الصورة */
+  object-fit: cover;     /* الصورة تملا الإطار من غير ما تتمط */
+  border-radius: 20px;   /* الزوايا المدورة */
+  border: none;
+}
+
+
+
+.texts {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 1.3rem;
+  line-height: 2;
+}
+
+.sign {
+  margin-top: 40px;
+  font-size: 1.6rem;
+  color: #bfc9c6;
+}
+
+/* =====================================================
+   ===== الإضافة الوحيدة: التجاوب مع كل الشاشات =====
+   ===================================================== */
+
+/* منع الصورة والمحتوى من الخروج عن الشاشة */
+.photo {
+  max-width: 100%;
+}
+
+.photo img {
+  max-width: 100%;
+}
+
+.texts {
+  max-width: 800px;
+}
+
+/* شاشات كبيرة جداً (تلفزيون / 2K / 4K) */
+@media (min-width: 1600px) {
+  .hello { font-size: 8rem; }
+  .photo img { width: 450px; height: 520px; }
+  .texts { font-size: 1.6rem; max-width: 1000px; }
+  .sign { font-size: 2rem; }
+}
+
+/* لاب توب */
+@media (max-width: 1199px) {
+  .hello { font-size: 5.5rem; }
+}
+
+/* تابلت */
+@media (max-width: 991px) {
+  .hello { font-size: 4.5rem; margin-bottom: 40px; }
+  .photo img { width: 320px; height: 370px; }
+  .texts { font-size: 1.2rem; }
+  .sign { font-size: 1.5rem; }
+}
+
+/* موبايل كبير */
+@media (max-width: 767px) {
+  .content { padding: 40px 16px; }
+  .hello { font-size: 3.5rem; margin-bottom: 30px; }
+  .photo img { width: 280px; height: 330px; }
+  .texts { font-size: 1.1rem; margin-top: 25px; }
+  .sign { font-size: 1.4rem; margin-top: 30px; }
+}
+
+/* موبايل عادي */
+@media (max-width: 480px) {
+  .content { padding: 30px 14px; }
+  .hello { font-size: 2.8rem; margin-bottom: 25px; }
+  .photo img { width: 240px; height: 290px; border-radius: 16px; }
+  .texts { font-size: 1rem; line-height: 1.9; }
+  .sign { font-size: 1.25rem; margin-top: 25px; }
+}
+
+/* موبايل صغير */
+@media (max-width: 360px) {
+  .hello { font-size: 2.3rem; }
+  .photo img { width: 200px; height: 250px; }
+  .texts { font-size: 0.95rem; }
+  .sign { font-size: 1.15rem; }
+}
+
+/* موبايل في الوضع الأفقي (landscape) */
+@media (max-height: 500px) and (orientation: landscape) {
+  .content { padding: 25px 20px; }
+  .hello { font-size: 2.5rem; margin-bottom: 20px; }
+  .photo img { width: 180px; height: 220px; }
+}
